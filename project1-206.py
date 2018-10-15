@@ -65,6 +65,16 @@ def classSizes(data):
 
 
 def findMonth(a):
+	month_dict = {}
+	for d in a:
+		birth_dates = d['DOB']
+		lst_dob = birth_dates.split('/')
+		month = lst_dob[0]
+		if month not in month_dict:
+			month_dict[month] = 0
+		month_dict[month] += 1
+	sorted_months = sorted(month_dict.items(), key = lambda tup: tup[1], reverse = True)
+	return sorted_months[0][0]
 # Find the most common birth month form this data
 # Input: list of dictionaries
 # Output: Return the month (1-12) that had the most births in the data
