@@ -2,12 +2,12 @@ import os
 import filecmp
 from dateutil.relativedelta import *
 from datetime import date
+import csv
 
 
 def getData(file):
 	inFile = open(file, "r")
 	lines = inFile.readlines()
-	outFile = open("outfile.csv", "w")
 	myDicts = []
 	for line in lines[1:]:
 		d = dict()
@@ -26,7 +26,6 @@ def getData(file):
 
 		myDicts.append(d)
 	inFile.close()
-	outFile.close()
 	return myDicts
 # get a list of dictionary objects from the file
 #Input: file name
@@ -54,7 +53,6 @@ def classSizes(data):
 		class_dict[d['Class']] += 1
 
 	return sorted(class_dict.items(), key = lambda tup: tup[1], reverse = True)
-
 # Create a histogram
 # Input: list of dictionaries
 # Output: Return a list of tuples sorted by the number of students in that class in
@@ -82,6 +80,15 @@ def findMonth(a):
 	pass
 
 def mySortPrint(a,col,fileName):
+	outfile = open(fileName, 'w')
+	sorted_d = sorted(a, key = lambda k: k[col])
+	for student_info in sorted_d:
+		firstName = student_info['First']
+		lastName = student_info['Last']
+		email = student_info['Email']
+		outfile.write('{},{},{}\n'.format(firstName, lastName, email))
+
+	outfile.close()
 #Similar to mySort, but instead of returning single
 #Student, the sorted data is saved to a csv file.
 # as fist,last,email
