@@ -7,7 +7,7 @@ from datetime import date
 def getData(file):
 	inFile = open(file, "r")
 	lines = inFile.readlines()
-	outFile = open("outfile_final.csv", "w")
+	outFile = open("outfile.csv", "w")
 	myDicts = []
 	for line in lines[1:]:
 		d = dict()
@@ -27,7 +27,7 @@ def getData(file):
 		myDicts.append(d)
 	inFile.close()
 	outFile.close()
-	return myDicts		
+	return myDicts
 # get a list of dictionary objects from the file
 #Input: file name
 #Ouput: return a list of dictionary objects where
