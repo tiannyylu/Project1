@@ -47,6 +47,14 @@ def mySort(data,col):
 
 
 def classSizes(data):
+	class_dict = {}
+	for d in data:
+		if d['Class'] not in class_dict:
+			class_dict[d['Class']] = 0
+		class_dict[d['Class']] += 1
+
+	return sorted(class_dict.items(), key = lambda tup: tup[1], reverse = True)
+
 # Create a histogram
 # Input: list of dictionaries
 # Output: Return a list of tuples sorted by the number of students in that class in
