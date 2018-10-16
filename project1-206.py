@@ -6,6 +6,11 @@ import csv
 
 
 def getData(file):
+	"""The function extracts a file from your computer
+
+	and returns a list of dictionaries in which the keys are the headers
+	and the values are the rows under the headers.
+	"""
 	inFile = open(file, "r")
 	lines = inFile.readlines()
 	myDicts = []
@@ -35,6 +40,11 @@ def getData(file):
 	pass
 
 def mySort(data,col):
+	"""The function returns the data in the list of dictionaries in a sorted order based on the specifc input value
+
+	data - list of dictionaries
+	col - the value the dictionaries are sorted on
+	"""
 	sorted_d = sorted(data, key = lambda k: k[col])
 	sorted_first = sorted_d[0]
 	return sorted_first['First'] + ' ' + sorted_first['Last']
@@ -46,6 +56,10 @@ def mySort(data,col):
 
 
 def classSizes(data):
+	"""The function returns a list of tuples from largest class to smallest class
+
+	data - list of dictionaries
+	"""
 	class_dict = {}
 	for d in data:
 		if d['Class'] not in class_dict:
@@ -63,6 +77,7 @@ def classSizes(data):
 
 
 def findMonth(a):
+	"""The function finds and returns the most common birth month."""
 	month_dict = {}
 	for d in a:
 		birth_dates = d['DOB']
@@ -80,6 +95,12 @@ def findMonth(a):
 	pass
 
 def mySortPrint(a,col,fileName):
+	"""The function sorts the list of dictionaries based on a value and writes the sorted list into a csv file
+
+	a - list of dictionaries
+	col - value the list of dictionaries is sorted on
+	fileName - the output file name
+	"""
 	outfile = open(fileName, 'w')
 	sorted_d = sorted(a, key = lambda k: k[col])
 	for student_info in sorted_d:
@@ -98,10 +119,11 @@ def mySortPrint(a,col,fileName):
 	pass
 
 def findAge(a):
+	"""The function finds the age of the students using their DOB and returns the average age."""
 	today = date.today()
 	ageLst = []
-	for student in a:
-		dob = student['DOB']
+	for person in a:
+		dob = person['DOB']
 		dobLst = dob.split('/')
 		month = int(dobLst[0])
 		day = int(dobLst[1])
