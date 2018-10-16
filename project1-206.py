@@ -72,7 +72,7 @@ def findMonth(a):
 			month_dict[month] = 0
 		month_dict[month] += 1
 	sorted_months = sorted(month_dict.items(), key = lambda tup: tup[1], reverse = True)
-	return sorted_months[0][0]
+	return int(sorted_months[0][0])
 # Find the most common birth month form this data
 # Input: list of dictionaries
 # Output: Return the month (1-12) that had the most births in the data
@@ -98,6 +98,19 @@ def mySortPrint(a,col,fileName):
 	pass
 
 def findAge(a):
+	today = date.today()
+	ageLst = []
+	for student in a:
+		dob = student['DOB']
+		dobLst = dob.split('/')
+		month = int(dobLst[0])
+		day = int(dobLst[1])
+		year = int(dobLst[2])
+		born = date(year, month, day)
+		age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+		ageLst.append(age)
+	avgAge = round(sum(ageLst)/len(ageLst))
+	return avgAge
 # def findAge(a):
 # Input: list of dictionaries
 # Output: Return the average age of the students and round that age to the nearest
